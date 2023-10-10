@@ -6,6 +6,8 @@ import Login from "./Pages/page_login/login";
 import User from "./Pages/page_user/user";
 import Error404 from "./Pages/page_error404/error404";
 
+import "./style/main.scss"
+
 function App() {
   return (
     <>

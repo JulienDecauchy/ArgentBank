@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../Components/header/header";
 import Footer from "../../Components/footer/footer";
+import { NavLink } from "react-router-dom";
 
 function Login() {
     return (
@@ -22,8 +23,8 @@ function Login() {
                         <div class="input-remember">
                             <input type="checkbox" id="remember-me" /><label for="remember-me">Remember me</label>
                         </div>
-                        <a href="./user.html" class="sign-in-button">Sign In</a>
-                        <button class="sign-in-button">Sign In</button>
+                        <NavLink to={"/User"}><button class="sign-in-button">Sign In</button></NavLink>
+                        {/*<button class="sign-in-button">Sign In</button>*/}
                     </form>
                 </section>
             </main>

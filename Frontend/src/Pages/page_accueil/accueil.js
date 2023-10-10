@@ -2,6 +2,10 @@ import React from "react";
 import Header from "../../Components/header/header";
 import Footer from "../../Components/footer/footer";
 
+import iconChat from "../../assets/img/icon-chat.png";
+import iconMoney from "../../assets/img/icon-money.png";
+import iconSecurity from "../../assets/img/icon-security.png";
+
 function Accueil() {
     return (
         <>
@@ -19,7 +23,7 @@ function Accueil() {
                 <section class="features">
                     <h2 class="sr-only">Features</h2>
                     <div class="feature-item">
-                        <img src="./img/icon-chat.png" alt="Chat Icon" class="feature-icon" />
+                        <img src={iconChat} alt="Chat Icon" class="feature-icon" />
                         <h3 class="feature-item-title">You are our #1 priority</h3>
                         <p>
                             Need to talk to a representative? You can get in touch through our
@@ -28,7 +32,7 @@ function Accueil() {
                     </div>
                     <div class="feature-item">
                         <img
-                            src="./img/icon-money.png"
+                            src={iconMoney}
                             alt="Chat Icon"
                             class="feature-icon"
                         />
@@ -39,7 +43,7 @@ function Accueil() {
                     </div>
                     <div class="feature-item">
                         <img
-                            src="./img/icon-security.png"
+                            src={iconSecurity}
                             alt="Chat Icon"
                             class="feature-icon"
                         />

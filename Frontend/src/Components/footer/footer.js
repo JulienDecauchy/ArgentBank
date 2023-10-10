@@ -2,8 +2,8 @@ import React from "react";
 
 function Footer() {
     return (
-        <footer>
-            <p>Copyright 2020 Argent Bank</p>
+        <footer class="footer">
+            <p class="footer-text">Copyright 2020 Argent Bank</p>
         </footer>
     )
 }

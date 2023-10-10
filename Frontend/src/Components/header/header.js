@@ -1,21 +1,27 @@
 import React from "react";
 
+import iconBank from "../../assets/img/argentBankLogo.png"
+import { NavLink } from "react-router-dom";
+
 function Header() {
     return (
         <header>
-            <nav>
-                <a>
-                    <img
-                        src="./img/argentBankLogo.png"
-                        alt="Argent Bank Logo"
-                    />
-                    <h1>Argent Bank</h1>
-                </a>
+            <nav class="main-nav">
+                <NavLink to={"/"}>
+                    <div class="main-nav-logo">
+                        <img
+                            class="main-nav-logo-image"
+                            src={iconBank}
+                            alt="Argent Bank Logo"
+                        />
+                        <h1 class="sr-only">Argent Bank</h1>
+                    </div>
+                </NavLink>
                 <div>
-                    <a>
-                        <i class="fa fa-user-circle"></i>
-                        Sign In
-                    </a>
+                    <NavLink to={"/Login"}>
+                            <i class="fa fa-user-circle main-nav-item"></i>
+                            Sign In
+                    </NavLink>
                 </div>
             </nav>
         </header>
