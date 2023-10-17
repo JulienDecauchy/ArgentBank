@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import ActivateButton from "../ActivateButton/ActivateButton";
+import { useStore } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const store = useStore()
+    const navigate = useNavigate()
 
     return (
       <div className="form">
