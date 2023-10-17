@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ActivateButton from "../ActivateButton/ActivateButton";
 import { useStore } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../store/userStore";
 
 function LoginForm() {
     const [email, setEmail] = useState('')
@@ -14,7 +15,6 @@ function LoginForm() {
         navigate('/User')
       }
     
-
     return (
         <div className="form">
         <div className="input-wrapper">
@@ -39,7 +39,7 @@ function LoginForm() {
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        <ActivateButton title="Sign In" />
+        <ActivateButton title="Sign In" action={Form}/>
       </div>
     )
   }

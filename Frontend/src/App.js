@@ -7,17 +7,21 @@ import User from "./Pages/page_user/user";
 import Error404 from "./Pages/page_error404/error404";
 
 import "./style/main.scss"
+import { Provider } from "react-redux";
+import store from "./store/userStore";
 
 function App() {
   return (
     <>
       {/* Defining routes path and rendering components as element */}
-      <Routes>
-        <Route path="/" element={<Accueil />}/>
-        <Route path="/Login" element={<Login />}/>
-        <Route path="/User" element={<User />}/>
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+      <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<Accueil />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/User" element={<User />} />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+      </Provider>
     </>
   );
 }
