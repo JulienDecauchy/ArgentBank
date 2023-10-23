@@ -77,6 +77,7 @@ export const userProfile = async (token) => {
 function userReducer(state = initialState, action) {
     return produce(state, (draft) => {
         switch (action.type) {
+            case PROFILE:
             case LOGIN: {
                 if (draft.status === 'void') {
                     draft.status = 'pending'
@@ -115,6 +116,25 @@ function userReducer(state = initialState, action) {
                 draft.status = 'resolved'
                 return
             }
+            case PROFILE_RESOLVED: {
+                if (draft.status === 'pending' || draft.status === 'updating') {
+                  draft.data = action.payload
+                  draft.status = 'resolved'
+                  return
+                }
+                return
+              }
+              case PROFILE_REJECTED: {
+                if (draft.status === 'pending' || draft.status === 'updating') {
+                  draft.error = action.payload
+                  draft.data = null
+                  draft.status = 'rejected'
+                  return
+                }
+                return
+              }
+              default:
+                return
         }
     })
 }
