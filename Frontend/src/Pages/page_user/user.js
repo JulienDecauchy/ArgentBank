@@ -1,14 +1,37 @@
 import React from "react";
 import Header from "../../Components/header/header";
 import Footer from "../../Components/footer/footer";
+import { useStore } from 'react-redux'
+import { useNavigate } from "react-router-dom";
+import { userProfile, logoutUser } from "../../store/userStore";
+import { useEffect, useState } from "react";
 
 function User() {
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const store = useStore()
+    const navigate = useNavigate()
+    const token = store.getState().user.token
+    useEffect(() => {
+      const callUserProfile = async () => {
+        await userProfile(token)
+        if (store.getState().user?.status === 'resolved') {
+          const user = store.getState().user?.data
+          setFirstName(user?.firstName)
+          setLastName(user?.lastName)
+        } else {
+          logoutUser(store)
+          navigate('/login')
+        }
+      }
+      callUserProfile()
+    }, [token, store, navigate])
     return (
         <>
             <Header />
             <main class="main bg-dark">
                 <div class="header">
-                    <h1>Welcome back<br />Tony Jarvis!</h1>
+                    <h1>Welcome back<br />{firstName} {lastName}!</h1>
                     <button class="edit-button">Edit Name</button>
                 </div>
                 <h2 class="sr-only">Accounts</h2>

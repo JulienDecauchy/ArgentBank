@@ -64,7 +64,7 @@ export const userProfile = async (token) => {
     }
     store.dispatch(userGetProfile())
     try {
-      const response = await axios.post(URL + 'profile', {}, config)
+      const response = await axios.post(API + 'profile', {}, config)
       const data = response.data.body
       store.dispatch(userProfileResolved(data))
     } catch (error) {
