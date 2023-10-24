@@ -1,28 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { useStore } from "react-redux";
 
 import iconBank from "../../assets/img/argentBankLogo.png"
 import { NavLink } from "react-router-dom";
 
+import LoginButton from "../LoginButton/LoginButton";
+
 function Header() {
+    const [hasToken, setHasToken] = useState(false)
+    const store = useStore()
+    store.subscribe(() => {
+        setHasToken(store.getState().user?.token?.length)
+    })
+
     return (
         <header>
-            <nav class="main-nav">
+            <nav className="main-nav">
                 <NavLink to={"/"}>
-                    <div class="main-nav-logo">
+                    <div className="main-nav-logo">
                         <img
-                            class="main-nav-logo-image"
+                            className="main-nav-logo-image"
                             src={iconBank}
                             alt="Argent Bank Logo"
                         />
-                        <h1 class="sr-only">Argent Bank</h1>
+                        <h1 className="sr-only">Argent Bank</h1>
                     </div>
                 </NavLink>
-                <div>
-                    <NavLink to={"/Login"}>
-                            <i class="fa fa-user-circle main-nav-item"></i>
-                            Sign In
-                    </NavLink>
-                </div>
+                <LoginButton />
             </nav>
         </header>
     )
