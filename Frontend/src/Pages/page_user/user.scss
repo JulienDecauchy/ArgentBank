@@ -43,6 +43,12 @@
     padding: 10px;
   }
 
+  .updateName-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .updateName {
     width: 15em;
     margin: 10px;

@@ -63,7 +63,7 @@ function User() {
                         </div>
                     )}
                     {editing && (
-                        <div>
+                        <div className="updateName-div">
                             <label htmlFor="firstName">First Name</label>
                             <input
                                 className="updateName"
@@ -80,7 +80,6 @@ function User() {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
-                            <br />
                             <ActivateButton title="Save" action={saveName} />
                         </div>
                     )}
