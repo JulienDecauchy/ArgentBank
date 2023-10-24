@@ -17,9 +17,13 @@ function LogoutButton() {
     return (
         <div className="main-nav-logout">
             <NavLink className="main-nav-item" to="/User">
-                <i class="fa-solid fa-right-from-bracket">{userName}</i>
+                <i className="fa fa-user-circle main-nav-item"></i>
+                {userName}
             </NavLink>
-            <NavLink className="main-nav-item" onClick={Logout} to="/">Sign Out</NavLink>
+            <NavLink className="main-nav-item" onClick={Logout} to="/">
+                <i class="fa-solid fa-right-from-bracket main-nav-item"></i>
+                Sign Out
+            </NavLink>
         </div>
     )
 }

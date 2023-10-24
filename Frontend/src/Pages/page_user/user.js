@@ -1,15 +1,20 @@
 import React from "react";
 import Header from "../../Components/header/header";
 import Footer from "../../Components/footer/footer";
+
+import ActivateButton from "../../Components/ActivateButton/ActivateButton";
+
 import { useStore } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { userProfile, logoutUser } from "../../store/userStore";
+import { userProfile, logoutUser, updateUserData } from "../../store/userStore";
 import { useEffect, useState } from "react";
+
 
 function User() {
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [editing, setEditing] = useState(false)
 
     const store = useStore()
     const navigate = useNavigate()
@@ -17,28 +22,68 @@ function User() {
     const token = store.getState().user.token
 
     useEffect(() => {
-      const callUserProfile = async () => {
-        await userProfile(token)
+        const callUserProfile = async () => {
+            await userProfile(token)
 
-        if (store.getState().user?.status === 'resolved') {
-          const user = store.getState().user?.data
-          setFirstName(user?.firstName)
-          setLastName(user?.lastName)
-        } else {
-          logoutUser(store)
-          navigate('/login')
+            if (store.getState().user?.status === 'resolved') {
+                const user = store.getState().user?.data
+                setFirstName(user?.firstName)
+                setLastName(user?.lastName)
+            } else {
+                logoutUser(store)
+                navigate('/login')
+            }
         }
-      }
-      callUserProfile()
+        callUserProfile()
     }, [token, store, navigate])
+
+    const EditData = () => {
+        setEditing(true)
+    }
+
+    const saveName = () => {
+        updateUserData({ firstName, lastName }, token).then(() =>
+            setEditing(false)
+        )
+    }
 
     return (
         <>
             <Header />
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{firstName} {lastName}!</h1>
-                    <button className="edit-button">Edit Name</button>
+                    <h1>Welcome back !</h1>
+                    {!editing && (
+                        <div>
+                            <span className="welcome">
+                                {firstName} {lastName}
+                            </span>
+                            <br />
+                            <ActivateButton title="Edit Name" action={EditData} />
+                        </div>
+                    )}
+                    {editing && (
+                        <div>
+                            <label htmlFor="firstName">First Name</label>
+                            <input
+                                className="updateName"
+                                id="firstName"
+                                type="texte"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            <label htmlFor="lastName">Last Name</label>
+                            <input
+                                className="updateName"
+                                id="lastName"
+                                type="texte"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                            <br />
+                            <ActivateButton title="Save" action={saveName} />
+                        </div>
+                    )}
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">

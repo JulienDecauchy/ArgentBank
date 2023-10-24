@@ -5,9 +5,12 @@ import iconBank from "../../assets/img/argentBankLogo.png"
 import { NavLink } from "react-router-dom";
 
 import LoginButton from "../LoginButton/LoginButton";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 function Header() {
+    
     const [hasToken, setHasToken] = useState(false)
+
     const store = useStore()
     store.subscribe(() => {
         setHasToken(store.getState().user?.token?.length)
@@ -26,7 +29,7 @@ function Header() {
                         <h1 className="sr-only">Argent Bank</h1>
                     </div>
                 </NavLink>
-                <LoginButton />
+                {hasToken ? <LogoutButton /> : <LoginButton />}
             </nav>
         </header>
     )
