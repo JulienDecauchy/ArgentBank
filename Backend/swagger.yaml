@@ -134,7 +134,7 @@ paths:
           description: authentication is required
         '500':
           description: Internal Server Error
-  /transactions/id:
+  /transactions/:id:
     get:
       security:
         - Bearer: []
@@ -199,6 +199,48 @@ paths:
       responses:
         '200':
           description: User transactions informations successfully created
+          schema:
+            $ref: '#/definitions/ApiOneTransactionResponse'
+        '400':
+          description: invalid field
+        '401':
+          description: authentication is required
+        '403':
+          description: access forbidden
+        '404':
+          description: transaction not found
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User specific Transaction API
+      description: API for modifying information to the user specific transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - name: id
+          in: path
+          description: ID of the transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: body
+          name: body
+          description: Update user transaction attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionTitle'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions informations successfully modified
           schema:
             $ref: '#/definitions/ApiOneTransactionResponse'
         '400':
