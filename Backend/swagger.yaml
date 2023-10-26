@@ -117,7 +117,7 @@ paths:
       tags:
         - Transaction Module
       summary: User Transactions API
-      description: API for getting all monthly transactions of the user
+      description: API for getting all monthly transactions from the user
       parameters:
         - in: header
           name: Authorization
@@ -132,6 +132,83 @@ paths:
             $ref: '#/definitions/ApiResponseTransactions'
         '401':
           description: authentication is required
+        '500':
+          description: Internal Server Error
+  /transactions/id:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User specific Transaction API
+      description: API for getting one specific transaction information from the user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - name: id
+          in: path
+          description: ID of the transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: user transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/ApiOneTransactionResponse'
+        '401':
+          description: authentication is required
+        '403':
+          description: access forbidden
+        '404':
+          description: transaction not found
+        '500':
+          description: Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User specific Transaction API
+      description: API for adding information to the user specific transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - name: id
+          in: path
+          description: ID of the transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: body
+          name: body
+          description: Update user transaction attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionTitle'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions informations successfully created
+          schema:
+            $ref: '#/definitions/ApiOneTransactionResponse'
+        '400':
+          description: invalid field
+        '401':
+          description: authentication is required
+        '403':
+          description: access forbidden
+        '404':
+          description: transaction not found
         '500':
           description: Internal Server Error
 
@@ -219,3 +296,39 @@ definitions:
              type: number
             currency: 
               type: string
+  ApiOneTransactionResponse:
+    type: object
+    properties:
+      body:
+        type: object
+        properties:
+          id:
+            type: number
+          date:
+            type: string
+            exemple: DD/MM/YYYY
+          type:
+            type: string
+          category:
+            type: string
+          sub-category:
+            type: string
+          title:
+            type: string
+          description:
+            type: string
+          custom-description:
+            type: string
+          amount:
+            type: number
+  TransactionTitle:
+    type: object
+    properties:
+      title:
+        type: string
+      category:
+        type: string
+      sub-category:
+        type: string
+      custom-description:
+        type: string

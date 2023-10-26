@@ -14,8 +14,14 @@ const LOGIN_RESOLVED = 'user/loginResolved'
 const LOGIN_REJECTED = 'user/loginRejected'
 const LOGOUT = 'user/logout'
 const userLogin = () => ({ type: LOGIN })
-const userLoginResolved = (data) => ({ type: LOGIN_RESOLVED, payload: data })
-const userLoginRejected = (error) => ({ type: LOGIN_REJECTED, payload: error })
+const userLoginResolved = (data) => ({ 
+  type: LOGIN_RESOLVED, 
+  payload: data 
+})
+const userLoginRejected = (error) => ({ 
+  type: LOGIN_REJECTED, 
+  payload: error 
+})
 const userLogout = () => ({ type: LOGOUT })
 
 const PROFILE = 'user/profile'
