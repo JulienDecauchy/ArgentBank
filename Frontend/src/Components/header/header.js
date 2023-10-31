@@ -1,25 +1,29 @@
-import React, { useState } from "react";
-import { useStore } from "react-redux";
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../Redux/userAPI"
 
 import iconBank from "../../assets/img/argentBankLogo.png"
-import { NavLink } from "react-router-dom";
+import iconUser from "../../assets/img/icon-user.png"
+import iconRightBracket from "../../assets/img/icon-RightBracket.png"
 
-import LoginButton from "../LoginButton/LoginButton";
-import LogoutButton from "../LogoutButton/LogoutButton";
 
 function Header() {
-    
-    const [hasToken, setHasToken] = useState(false)
+    const lienActif = useLocation();
+    const { isAuthenticated, user } = useSelector((state) => state);
+    const { userName } = user;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const store = useStore()
-    store.subscribe(() => {
-        setHasToken(store.getState().user?.token?.length)
-    })
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/");
+    };
 
     return (
         <header>
             <nav className="main-nav">
-                <NavLink to={"/"}>
+                <Link to={"/"}>
                     <div className="main-nav-logo">
                         <img
                             className="main-nav-logo-image"
@@ -28,8 +32,7 @@ function Header() {
                         />
                         <h1 className="sr-only">Argent Bank</h1>
                     </div>
-                </NavLink>
-                {hasToken ? <LogoutButton /> : <LoginButton />}
+                </Link>
             </nav>
         </header>
     )
