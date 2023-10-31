@@ -9,7 +9,7 @@ import iconRightBracket from "../../assets/img/icon-RightBracket.png"
 
 
 function Header() {
-    const lienActif = useLocation();
+    const ActiveLink = useLocation();
     const { isAuthenticated, user } = useSelector((state) => state);
     const { userName } = user;
     const dispatch = useDispatch();
@@ -21,21 +21,49 @@ function Header() {
     };
 
     return (
-        <header>
-            <nav className="main-nav">
-                <Link to={"/"}>
-                    <div className="main-nav-logo">
+        <nav className="main-nav">
+            <Link
+                to="/"
+                className={`main-nav-logo ${ActiveLink.pathname === "/" ? "actif" : ""}`}
+            >
+                <img
+                    className="main-nav-logo-image"
+                    src={iconBank}
+                    alt="Argent Bank Logo"
+                />
+            </Link>
+            <div className="nav-items">
+                {!isAuthenticated && (
+                    <Link
+                        to="/login"
+                        className={`main-nav-item ${ActiveLink.pathname === "/login" ? "actif" : ""
+                            }`}
+                    >
+                        <img src={iconUser} className="circleuser" alt="circleuser" />
+                        Sign In
+                    </Link>
+                )}
+
+                {isAuthenticated && (
+                    <Link to="/user" className="main-nav-item">
+                        <img src={iconUser} className="circleuser" alt="circleuser" />
+                        <p>{userName}</p>
+                    </Link>
+                )}
+
+                {isAuthenticated && (
+                    <div className="main-nav-item" onClick={handleLogout}>
                         <img
-                            className="main-nav-logo-image"
-                            src={iconBank}
-                            alt="Argent Bank Logo"
+                            src={iconRightBracket}
+                            className="rightbracket"
+                            alt="rightbracket"
                         />
-                        <h1 className="sr-only">Argent Bank</h1>
+                        <a>Sign Out</a>
                     </div>
-                </Link>
-            </nav>
-        </header>
-    )
+                )}
+            </div>
+        </nav>
+    );
 }
 
 export default Header
