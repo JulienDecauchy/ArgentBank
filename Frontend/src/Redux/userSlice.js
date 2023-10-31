@@ -24,5 +24,14 @@ const reducer = (state = initialState, action) => {
                 isAuthenticated: true,
                 token: action.payload,
             };
+        case USER:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    ...action.payload,
+                },
+            };
+
     }
 };
