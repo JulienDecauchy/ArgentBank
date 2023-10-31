@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../../Components/header/header";
-import Footer from "../../Components/footer/footer";
 
 import iconChat from "../../assets/img/icon-chat.png";
 import iconMoney from "../../assets/img/icon-money.png";
@@ -9,7 +7,6 @@ import iconSecurity from "../../assets/img/icon-security.png";
 function Accueil() {
     return (
         <>
-            <Header />
             <main>
                 <div class="hero">
                     <section class="hero-content">
@@ -55,7 +52,6 @@ function Accueil() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     )
 }

@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userName } from "../../Redux/userAPI";
 
-import Header from "../../Components/header/header";
-import Footer from "../../Components/footer/footer";
-
-
 function User() {
 
     const user = useSelector((state) => state.user);
@@ -22,40 +18,44 @@ function User() {
         setIsEditing(false);
     };
 
+    const tag = `${user.firstName} ${user.lastName}`;
+
     return (
         <>
-            <Header />
             <main className="main bg-dark">
-                <div className="header">
-                    <h1>Welcome back !</h1>
-                    {!editing && (
-                        <div>
-                            <span className="welcome">
-                                {firstName} {lastName}
-                            </span>
-                            <br />
-                            <ActivateButton title="Edit Name" action={EditData} />
+                <div className="user-form">
+                    {isEditing ? (
+                        <div className="edit-infos">
+                            <h1>Edit user info</h1>
+                            <div className="edit">
+                                <div className="edit-form">
+                                    <h3>Username : </h3>
+                                    <input
+                                        type="text"
+                                        value={newUserName}
+                                        onChange={(e) => setNewUserName(e.target.value)}
+                                    />
+                                </div>
+                                <div className="edit-form">
+                                    <h3>First name : </h3>
+                                    <input type="text" value={user.firstName} disabled />
+                                </div>
+                                <div className="edit-form">
+                                    <h3>Last name : </h3>
+                                    <input type="text" value={user.lastName} disabled />
+                                </div>
+                            </div>
+                            <div className="edit-buttons">
+                                <button onClick={handleSubmitClick}>Save</button>
+                                <button onClick={handleEditClick}>Cancel</button>
+                            </div>
                         </div>
-                    )}
-                    {editing && (
-                        <div className="updateName-div">
-                            <label htmlFor="firstName">First Name</label>
-                            <input
-                                className="updateName"
-                                id="firstName"
-                                type="texte"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                            <label htmlFor="lastName">Last Name</label>
-                            <input
-                                className="updateName"
-                                id="lastName"
-                                type="texte"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                            <ActivateButton title="Save" action={saveName} />
+                    ) : (
+                        <div>
+                            <h1>Welcome back <br /> {tag} !</h1>
+                            <button className="edit-button" onClick={handleEditClick}>
+                                Edit Name
+                            </button>
                         </div>
                     )}
                 </div>
@@ -91,7 +91,6 @@ function User() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     )
 }

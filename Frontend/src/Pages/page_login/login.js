@@ -8,7 +8,6 @@ import iconUser from "../../assets/img/icon-user.png"
 function Login() {
     return (
         <>
-            <Header />
             <main class="main bg-dark">
                 <section class="sign-in-content">
                     <img src={iconUser} className="icon_user-2" alt="circleuser" />
@@ -16,7 +15,6 @@ function Login() {
                     <LoginForm />
                 </section>
             </main>
-            <Footer />
         </>
     )
 }

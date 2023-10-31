@@ -1,15 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
 import userReducer from "./userSlice";
 
-const store = configureStore({
-  reducer: {
-    user: userReducer
-  }
-})
+const store = createStore(userReducer, applyMiddleware(thunk));
 
-const handleStateChange = () => {
-  const currentState = store.getState();
-};
-store.subscribe(handleStateChange);
 
 export default store;

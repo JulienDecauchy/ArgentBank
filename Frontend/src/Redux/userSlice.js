@@ -16,7 +16,7 @@ const initialState = {
     token: null,
 };
 
-const userReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -24,6 +24,7 @@ const userReducer = (state = initialState, action) => {
                 isAuthenticated: true,
                 token: action.payload,
             };
+
         case USER:
             return {
                 ...state,
@@ -32,6 +33,7 @@ const userReducer = (state = initialState, action) => {
                     ...action.payload,
                 },
             };
+
         case USER_NAME:
             return {
                 ...state,
@@ -40,6 +42,7 @@ const userReducer = (state = initialState, action) => {
                     userName: action.payload,
                 },
             };
+
         case LOGOUT:
             return initialState;
 
@@ -48,4 +51,4 @@ const userReducer = (state = initialState, action) => {
     }
 };
 
-export default userReducer;
+export default reducer;

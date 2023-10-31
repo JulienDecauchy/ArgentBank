@@ -11,7 +11,7 @@ function LoginForm() {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -53,9 +53,9 @@ function LoginForm() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated === true && window.location.pathname !== "/user") {
+    if (isAuthenticated === true && window.location.pathname !== "/User") {
       dispatch(getProfile());
-      navigate("/user");
+      navigate("/User");
     }
   }, [isAuthenticated, dispatch, navigate]);
 
@@ -65,7 +65,6 @@ function LoginForm() {
         <label htmlFor="username">Username</label>
         <input
           type="text"
-          id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -74,15 +73,14 @@ function LoginForm() {
         <label htmlFor="password">Password</label>
         <input
           type="password"
-          id="password"
           value={password}
+          autoComplete="true"
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div className="input-remember">
         <input
           type="checkbox"
-          id="remember-me"
           checked={rememberMe}
           onChange={() => setRememberMe(!rememberMe)}
         />
