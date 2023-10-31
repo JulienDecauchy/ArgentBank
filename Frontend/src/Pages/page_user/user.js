@@ -1,51 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userName } from "../../Redux/userAPI";
+
 import Header from "../../Components/header/header";
 import Footer from "../../Components/footer/footer";
 
-import ActivateButton from "../../Components/ActivateButton/ActivateButton";
-
-import { useStore } from 'react-redux'
-import { useNavigate } from "react-router-dom";
-import { userProfile, logoutUser, updateUserData } from "../../store/userStore";
-import { useEffect, useState } from "react";
-
 
 function User() {
-    
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [editing, setEditing] = useState(false)
 
-    const store = useStore()
-    const navigate = useNavigate()
+    const user = useSelector((state) => state.user);
+    const [isEditing, setIsEditing] = useState(false);
+    const [newUserName, setNewUserName] = useState(user.userName);
+    const dispatch = useDispatch();
 
-    const token = store.getState().user.token
-
-    useEffect(() => {
-        const callUserProfile = async () => {
-            await userProfile(token)
-
-            if (store.getState().user?.status === 'resolved') {
-                const user = store.getState().user?.data
-                setFirstName(user?.firstName)
-                setLastName(user?.lastName)
-            } else {
-                logoutUser(store)
-                navigate('/login')
-            }
-        }
-        callUserProfile()
-    }, [token, store, navigate])
-
-    const EditData = () => {
-        setEditing(true)
+    const handleEditClick = () => {
+        setIsEditing(!isEditing)
     }
 
-    const saveName = () => {
-        updateUserData({ firstName, lastName }, token).then(() =>
-            setEditing(false)
-        )
-    }
+    const handleSubmitClick = () => {
+        dispatch(userName(newUserName));
+        setIsEditing(false);
+    };
 
     return (
         <>
