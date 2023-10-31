@@ -8,7 +8,7 @@ import Error404 from "./Pages/page_error404/error404";
 
 import "./style/main.scss"
 import { Provider } from "react-redux";
-import store from "./store/userStore";
+import store from "./Redux/userStore";
 
 function App() {
   return (

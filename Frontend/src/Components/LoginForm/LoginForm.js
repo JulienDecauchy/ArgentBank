@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ActivateButton from "../ActivateButton/ActivateButton";
-import { useStore } from 'react-redux'
+import { Login } from "../../Redux/userAPI";
+import { getProfile } from "../../Redux/userAPI";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../store/userStore";
 
 function LoginForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.isAuthenticated);
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const store = useStore()
-    const navigate = useNavigate()
 
-    const Form = async () => {
-        await loginUser(store, email, password)
-        navigate('/User')
-      }
-    
     return (
         <div className="form">
         <div className="input-wrapper">
