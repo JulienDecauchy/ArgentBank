@@ -16,7 +16,7 @@ const initialState = {
     token: null,
 };
 
-const reducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -47,3 +47,5 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export default userReducer;
