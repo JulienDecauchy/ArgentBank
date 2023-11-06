@@ -18,7 +18,7 @@ function User() {
         setIsEditing(false);
     };
 
-    const tag = `${user.firstName} ${user.lastName}`;
+    const tag = `${user.userName}`;
 
     return (
         <>
