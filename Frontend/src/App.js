@@ -25,7 +25,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Accueil />} />
               <Route path="/Login" element={<Login />} />
-              <Route path="/User" element={<User />} />
+              <Route path="/Profile" element={<User />} />
               <Route path="*" element={<Error404 />} />
             </Routes>
             <Footer />

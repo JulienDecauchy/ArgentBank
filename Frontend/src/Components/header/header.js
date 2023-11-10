@@ -45,7 +45,7 @@ function Header() {
                 )}
 
                 {isAuthenticated && (
-                    <Link to="/user" className="main-nav-item">
+                    <Link to="/Profile" className="main-nav-item">
                         <img src={iconUser} className="icon_user" alt="icon_user" />
                         <p>{userName}</p>
                     </Link>

@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../../Components/header/header";
-import Footer from "../../Components/footer/footer";
 import LoginForm from "../../Components/LoginForm/LoginForm";
 
 import iconUser from "../../assets/img/icon-user.png"

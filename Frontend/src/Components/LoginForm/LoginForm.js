@@ -17,9 +17,11 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
-      console.error("Erreur interne");
-      return;
+    if (!username) {
+      document.querySelector(".submit_error_username").innerHTML = "Enter Username";
+    }
+    if (!password) {
+      document.querySelector(".submit_error_password").innerHTML = "Enter Password";
     }
 
     const handleRememberMe = (rememberMe, username, password) => {
@@ -53,9 +55,9 @@ function LoginForm() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated === true && window.location.pathname !== "/User") {
+    if (isAuthenticated === true && window.location.pathname !== "/Profile") {
       dispatch(getProfile());
-      navigate("/User");
+      navigate("/Profile");
     }
   }, [isAuthenticated, dispatch, navigate]);
 
@@ -68,6 +70,7 @@ function LoginForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <div className="submit_error_username"></div>
       </div>
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
@@ -77,6 +80,7 @@ function LoginForm() {
           autoComplete="true"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div className="submit_error_password"></div>
       </div>
       <div className="input-remember">
         <input
