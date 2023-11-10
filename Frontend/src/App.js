@@ -11,7 +11,8 @@ import Footer from "./Components/footer/footer";
 
 import "./style/main.scss"
 import { Provider } from "react-redux";
-import store from "./Redux/userStore";
+import { store, persistor } from "./Redux/userStore";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
@@ -19,14 +20,16 @@ function App() {
       {/* Defining routes path and rendering components as element */}
       <Provider store={store}>
         <React.StrictMode>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Accueil />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/User" element={<User />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-          <Footer />
+          <PersistGate loading={null} persistor={persistor}>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Accueil />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/User" element={<User />} />
+              <Route path="*" element={<Error404 />} />
+            </Routes>
+            <Footer />
+          </PersistGate>
         </React.StrictMode>
       </Provider>
     </>
