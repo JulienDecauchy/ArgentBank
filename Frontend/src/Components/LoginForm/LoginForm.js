@@ -22,6 +22,10 @@ function LoginForm() {
     }
     if (!password) {
       document.querySelector(".submit_error_password").innerHTML = "Enter Password";
+      return;
+    }
+    if (isAuthenticated === false) {
+      document.querySelector(".submit_error_authenticated").innerHTML = "Error: Unkown User";
     }
 
     const handleRememberMe = (rememberMe, username, password) => {
@@ -93,6 +97,7 @@ function LoginForm() {
       <button type="submit" className="sign-in-button">
         Sign In
       </button>
+      <div className="submit_error_authenticated"></div>
     </form>
   )
 }
