@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userName } from "../../Redux/userAPI";
 import Account from "../../Components/Account/accout";
 import accountData from "../../Components/Account-Data/account-data";
+import { useNavigate } from "react-router-dom";
 
 function User() {
 
@@ -10,6 +11,15 @@ function User() {
     const [isEditing, setIsEditing] = useState(false);
     const [newUserName, setNewUserName] = useState(user.userName);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const dataToken = useSelector((state) => state.token);
+
+    useEffect(() => {
+        if (dataToken === null) {
+            navigate("/Login")
+        }
+        return
+      }, []);
 
     const handleEditClick = () => {
         setIsEditing(!isEditing)
