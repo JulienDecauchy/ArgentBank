@@ -12,5 +12,5 @@ const Account = ({ title, content, description }) => {
       </section>
     );
   };
-  
+
   export default Account;
